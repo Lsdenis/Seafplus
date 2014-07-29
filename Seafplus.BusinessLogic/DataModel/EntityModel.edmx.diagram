@@ -4,7 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1d02abc86589469bbf9daca99a253187" Name="Diagram1" />
+      <Diagram DiagramId="1d02abc86589469bbf9daca99a253187" Name="Diagram1" ZoomLevel="42" >
+        <EntityTypeShape EntityType="EntityModel.Board" Width="1.5" PointX="1.5" PointY="11.625" />
+        <EntityTypeShape EntityType="EntityModel.Card" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="EntityModel.Checkline" Width="1.5" PointX="7.5" PointY="7.625" />
+        <EntityTypeShape EntityType="EntityModel.Checklist" Width="1.5" PointX="5.25" PointY="7.625" />
+        <EntityTypeShape EntityType="EntityModel.List" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="EntityModel.sysdiagram" Width="1.5" PointX="7.75" PointY="2.125" />
+        <EntityTypeShape EntityType="EntityModel.UserBoard" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="EntityModel.UserCard" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="EntityModel.UserRole" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="EntityModel.User" Width="1.5" PointX="3" PointY="3.25" />
+        <AssociationConnector Association="EntityModel.FK_Lists_Boards" />
+        <AssociationConnector Association="EntityModel.FK_UserBoards_Boards" />
+        <AssociationConnector Association="EntityModel.FK_Cards_Lists" />
+        <AssociationConnector Association="EntityModel.FK_Checklists_Cards" />
+        <AssociationConnector Association="EntityModel.FK_UserCards_Cards" />
+        <AssociationConnector Association="EntityModel.FK_Checkline_Checklists" />
+        <AssociationConnector Association="EntityModel.FK_UserBoards_Users" />
+        <AssociationConnector Association="EntityModel.FK_UserCards_Users" />
+        <AssociationConnector Association="EntityModel.FK_Users_UserRoles" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

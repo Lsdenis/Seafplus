@@ -22,7 +22,7 @@ namespace Seafplus.BusinessLogic.DataModel
         }
     
         public int Id { get; set; }
-        public string GoogleId { get; set; }
+        public Nullable<long> GoogleId { get; set; }
         public int UserRoleId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -31,7 +31,7 @@ namespace Seafplus.BusinessLogic.DataModel
     
         public virtual ICollection<UserBoard> UserBoards { get; set; }
         public virtual ICollection<UserCard> UserCards { get; set; }
-        public virtual ICollection<UserOrganization> UserOrganizations { get; set; }
         public virtual UserRole UserRole { get; set; }
+        public virtual ICollection<UserOrganization> UserOrganizations { get; set; }
     }
 }

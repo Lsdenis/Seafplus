@@ -18,11 +18,18 @@ namespace Seafplus.BusinessLogic.DataModel
         {
             this.UserBoards = new HashSet<UserBoard>();
             this.UserCards = new HashSet<UserCard>();
+<<<<<<< HEAD
             this.UserOrganizations = new HashSet<UserOrganization>();
         }
     
         public int Id { get; set; }
+        public Nullable<long> GoogleId { get; set; }
+=======
+        }
+    
+        public int Id { get; set; }
         public string GoogleId { get; set; }
+>>>>>>> 8db6fabfb06c4957a1439c45c6d97030b526b5ee
         public int UserRoleId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -31,7 +38,10 @@ namespace Seafplus.BusinessLogic.DataModel
     
         public virtual ICollection<UserBoard> UserBoards { get; set; }
         public virtual ICollection<UserCard> UserCards { get; set; }
-        public virtual ICollection<UserOrganization> UserOrganizations { get; set; }
         public virtual UserRole UserRole { get; set; }
+<<<<<<< HEAD
+        public virtual ICollection<UserOrganization> UserOrganizations { get; set; }
+=======
+>>>>>>> 8db6fabfb06c4957a1439c45c6d97030b526b5ee
     }
 }

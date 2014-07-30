@@ -25,5 +25,18 @@ namespace Seafplus.BusinessLogic.DataModel
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Board> Boards { get; set; }
+        public DbSet<Card> Cards { get; set; }
+        public DbSet<Checkline> Checklines { get; set; }
+        public DbSet<Checklist> Checklists { get; set; }
+        public DbSet<List> Lists { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
+        public DbSet<UserBoard> UserBoards { get; set; }
+        public DbSet<UserCard> UserCards { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
+        public DbSet<Organization> Organizations { get; set; }
+        public DbSet<UserOrganization> UserOrganizations { get; set; }
     }
 }

@@ -24,6 +24,13 @@
         <AssociationConnector Association="EntityModel.FK_UserBoards_Users" />
         <AssociationConnector Association="EntityModel.FK_UserCards_Users" />
         <AssociationConnector Association="EntityModel.FK_Users_UserRoles" />
+        <EntityTypeShape EntityType="EntityModel.Attachment" Width="1.5" PointX="9.3056552621096635" PointY="1.0021291528838356" />
+        <EntityTypeShape EntityType="EntityModel.Organization" Width="1.5" PointX="11.260720414696596" PointY="24.843182664757215" />
+        <EntityTypeShape EntityType="EntityModel.UserOrganization" Width="1.5" PointX="2.1543716556180135" PointY="6.7387691618589542" />
+        <AssociationConnector Association="EntityModel.FK_Attachments_Cards" />
+        <AssociationConnector Association="EntityModel.FK_Boards_Organizations" />
+        <AssociationConnector Association="EntityModel.FK_UserOrganizations_Organizations" />
+        <AssociationConnector Association="EntityModel.FK_UserOrganizations_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

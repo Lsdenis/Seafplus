@@ -1,0 +1,39 @@
+﻿@model Seafplus.Models.UserViewModel
+
+@{
+	ViewBag.Title = "Log On";
+}
+
+<h2>Log On</h2>
+
+@using (Html.BeginForm()) {
+    <div class="form">
+        <fieldset>
+            <legend>Account Information</legend>
+			
+	        <div class="control-label">
+                @Html.LabelFor(m => m.Email)
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+
+           <div class="control-label">
+                @Html.LabelFor(m => m.Password)
+            </div>
+            <div>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+			
+			<br/>
+            <p>
+                <input type="submit" class="btn btn-primary" value="Log On" />
+            </p>
+        </fieldset>
+    </div>
+}
+
+<button class="btn btn-primary" id="login-with-google">Login with google</button>
+<script src="../../Scripts/logOn.js"></script>

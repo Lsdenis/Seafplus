@@ -136,12 +136,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="GoogleId" Type="bigint" />
+          <Property Name="GoogleId" Type="nvarchar(max)" />
           <Property Name="UserRoleId" Type="int" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_Cards_Lists">
           <End Role="Lists" Type="EntityModel.Store.Lists" Multiplicity="1" />
@@ -265,7 +265,6 @@
           <EntitySet Name="UserBoards" EntityType="EntityModel.UserBoard" />
           <EntitySet Name="UserCards" EntityType="EntityModel.UserCard" />
           <EntitySet Name="UserRoles" EntityType="EntityModel.UserRole" />
-          <EntitySet Name="Users" EntityType="EntityModel.User" />
           <AssociationSet Name="FK_Lists_Boards" Association="EntityModel.FK_Lists_Boards">
             <End Role="Board" EntitySet="Boards" />
             <End Role="List" EntitySet="Lists" />
@@ -290,6 +289,7 @@
             <End Role="Checklist" EntitySet="Checklists" />
             <End Role="Checkline" EntitySet="Checklines" />
           </AssociationSet>
+          <EntitySet Name="Users" EntityType="EntityModel.User" />
           <AssociationSet Name="FK_UserBoards_Users" Association="EntityModel.FK_UserBoards_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="UserBoard" EntitySet="UserBoards" />
@@ -302,7 +302,7 @@
             <End Role="UserRole" EntitySet="UserRoles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Board">
           <Key>
             <PropertyRef Name="Id" />
@@ -396,21 +396,6 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="EntityModel.FK_Users_UserRoles" FromRole="UserRole" ToRole="User" />
         </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int64" Name="GoogleId" />
-          <Property Type="Int32" Name="UserRoleId" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Password" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserBoards" Relationship="EntityModel.FK_UserBoards_Users" FromRole="User" ToRole="UserBoard" />
-          <NavigationProperty Name="UserCards" Relationship="EntityModel.FK_UserCards_Users" FromRole="User" ToRole="UserCard" />
-          <NavigationProperty Name="UserRole" Relationship="EntityModel.FK_Users_UserRoles" FromRole="User" ToRole="UserRole" />
-        </EntityType>
         <Association Name="FK_Lists_Boards">
           <End Type="EntityModel.Board" Role="Board" Multiplicity="1" />
           <End Type="EntityModel.List" Role="List" Multiplicity="*" />
@@ -483,6 +468,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="GoogleId" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UserRoleId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserBoards" Relationship="EntityModel.FK_UserBoards_Users" FromRole="User" ToRole="UserBoard" />
+          <NavigationProperty Name="UserCards" Relationship="EntityModel.FK_UserCards_Users" FromRole="User" ToRole="UserCard" />
+          <NavigationProperty Name="UserRole" Relationship="EntityModel.FK_Users_UserRoles" FromRole="User" ToRole="UserRole" />
+        </EntityType>
         <Association Name="FK_UserBoards_Users">
           <End Type="EntityModel.User" Role="User" Multiplicity="1" />
           <End Type="EntityModel.UserBoard" Role="UserBoard" Multiplicity="*" />
@@ -519,7 +519,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

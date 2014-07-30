@@ -1,0 +1,10 @@
+﻿@using Seafplus.BusinessLogic
+@using Seafplus.BusinessLogic.DataModel
+@if(Session[Constants.SessionKeys.User] is User)
+{
+    @Html.ActionLink("Log Off", "LogOff", "Account", null, new { id="log-on-link" })
+}
+else 
+{
+    @Html.ActionLink("Log On", "LogOn", "Account", null, new { id="log-on-link" })
+}

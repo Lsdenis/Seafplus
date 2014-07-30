@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using Seafplus.Helpers;
 
 namespace Seafplus
 {
@@ -31,6 +32,8 @@ namespace Seafplus
 
 			RegisterGlobalFilters(GlobalFilters.Filters);
 			RegisterRoutes(RouteTable.Routes);
+
+			AutomapperHelper.Init();
 		}
 	}
 }

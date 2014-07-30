@@ -357,7 +357,6 @@
           <EntitySet Name="UserBoards" EntityType="EntityModel.UserBoard" />
           <EntitySet Name="UserCards" EntityType="EntityModel.UserCard" />
           <EntitySet Name="UserRoles" EntityType="EntityModel.UserRole" />
-          <EntitySet Name="Users" EntityType="EntityModel.User" />
           <AssociationSet Name="FK_Lists_Boards" Association="EntityModel.FK_Lists_Boards">
             <End Role="Board" EntitySet="Boards" />
             <End Role="List" EntitySet="Lists" />
@@ -382,18 +381,6 @@
             <End Role="Checklist" EntitySet="Checklists" />
             <End Role="Checkline" EntitySet="Checklines" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserBoards_Users" Association="EntityModel.FK_UserBoards_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserBoard" EntitySet="UserBoards" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserCards_Users" Association="EntityModel.FK_UserCards_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserCard" EntitySet="UserCards" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_UserRoles" Association="EntityModel.FK_Users_UserRoles">
-            <End Role="UserRole" EntitySet="UserRoles" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
           <EntitySet Name="Attachments" EntityType="EntityModel.Attachment" />
           <EntitySet Name="Organizations" EntityType="EntityModel.Organization" />
           <EntitySet Name="UserOrganizations" EntityType="EntityModel.UserOrganization" />
@@ -409,9 +396,22 @@
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="UserOrganization" EntitySet="UserOrganizations" />
           </AssociationSet>
+          <EntitySet Name="Users" EntityType="EntityModel.User" />
+          <AssociationSet Name="FK_UserBoards_Users" Association="EntityModel.FK_UserBoards_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserBoard" EntitySet="UserBoards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCards_Users" Association="EntityModel.FK_UserCards_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserCard" EntitySet="UserCards" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserOrganizations_Users" Association="EntityModel.FK_UserOrganizations_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="UserOrganization" EntitySet="UserOrganizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserRoles" Association="EntityModel.FK_Users_UserRoles">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Board">
@@ -510,21 +510,6 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="EntityModel.FK_Users_UserRoles" FromRole="UserRole" ToRole="User" />
         </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserRoleId" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Password" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserBoards" Relationship="EntityModel.FK_UserBoards_Users" FromRole="User" ToRole="UserBoard" />
-          <NavigationProperty Name="UserCards" Relationship="EntityModel.FK_UserCards_Users" FromRole="User" ToRole="UserCard" />
-          <NavigationProperty Name="UserRole" Relationship="EntityModel.FK_Users_UserRoles" FromRole="User" ToRole="UserRole" />
-          <NavigationProperty Name="UserOrganizations" Relationship="EntityModel.FK_UserOrganizations_Users" FromRole="User" ToRole="UserOrganization" />
-        </EntityType>
         <Association Name="FK_Lists_Boards">
           <End Type="EntityModel.Board" Role="Board" Multiplicity="1" />
           <End Type="EntityModel.List" Role="List" Multiplicity="*" />
@@ -597,42 +582,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserBoards_Users">
-          <End Type="EntityModel.User" Role="User" Multiplicity="1" />
-          <End Type="EntityModel.UserBoard" Role="UserBoard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserBoard">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserCards_Users">
-          <End Type="EntityModel.User" Role="User" Multiplicity="1" />
-          <End Type="EntityModel.UserCard" Role="UserCard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserCard">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Users_UserRoles">
-          <End Type="EntityModel.UserRole" Role="UserRole" Multiplicity="1" />
-          <End Type="EntityModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRole">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserRoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Attachment">
           <Key>
             <PropertyRef Name="Id" />
@@ -698,6 +647,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="GoogleId" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UserRoleId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserBoards" Relationship="EntityModel.FK_UserBoards_Users" FromRole="User" ToRole="UserBoard" />
+          <NavigationProperty Name="UserCards" Relationship="EntityModel.FK_UserCards_Users" FromRole="User" ToRole="UserCard" />
+          <NavigationProperty Name="UserOrganizations" Relationship="EntityModel.FK_UserOrganizations_Users" FromRole="User" ToRole="UserOrganization" />
+          <NavigationProperty Name="UserRole" Relationship="EntityModel.FK_Users_UserRoles" FromRole="User" ToRole="UserRole" />
+        </EntityType>
+        <Association Name="FK_UserBoards_Users">
+          <End Type="EntityModel.User" Role="User" Multiplicity="1" />
+          <End Type="EntityModel.UserBoard" Role="UserBoard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserBoard">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCards_Users">
+          <End Type="EntityModel.User" Role="User" Multiplicity="1" />
+          <End Type="EntityModel.UserCard" Role="UserCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCard">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserOrganizations_Users">
           <End Type="EntityModel.User" Role="User" Multiplicity="1" />
           <End Type="EntityModel.UserOrganization" Role="UserOrganization" Multiplicity="*" />
@@ -707,6 +696,18 @@
             </Principal>
             <Dependent Role="UserOrganization">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserRoles">
+          <End Type="EntityModel.UserRole" Role="UserRole" Multiplicity="1" />
+          <End Type="EntityModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserRoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -804,18 +805,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="EntityModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Attachments">
             <EntityTypeMapping TypeName="EntityModel.Attachment">
               <MappingFragment StoreEntitySet="Attachments">
@@ -839,6 +828,19 @@
               <MappingFragment StoreEntitySet="UserOrganizations">
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EntityModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="GoogleId" ColumnName="GoogleId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

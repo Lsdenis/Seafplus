@@ -1,3 +1,11 @@
+using OAuth2;
+using Seafplus.BusinessLogic.DataModel;
+using Seafplus.BusinessLogic.Repository;
+using Seafplus.BusinessLogic.Services;
+using Seafplus.BusinessLogic.Services.Interfaces;
+using Seafplus.BusinessLogic.UnitOfWork;
+using Seafplus.Helpers;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Seafplus.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Seafplus.App_Start.NinjectWebCommon), "Stop")]
 
@@ -46,6 +54,7 @@ namespace Seafplus.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+
                 return kernel;
             }
             catch
@@ -55,12 +64,27 @@ namespace Seafplus.App_Start
             }
         }
 
-        /// <summary>
+		private static void InitStaticClasses(IKernel kernel)
+	    {
+			GlobalStoreHelper.Initialize(kernel.Get<IUserService>());
+	    }
+
+	    /// <summary>
         /// Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+	        kernel.Bind<EntityContainer>().ToSelf().InRequestScope();
+			kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
+
+			kernel.Bind<IUserService>().To<UserService>().InRequestScope();
+
+	        kernel.Bind<IRepository<User>>().To<BaseRepository<User>>().InRequestScope();
+
+			kernel.Bind<AuthorizationRoot>().ToSelf().WithConstructorArgument("sectionName", "oauth2");
+
+		    InitStaticClasses(kernel);
         }        
     }
 }

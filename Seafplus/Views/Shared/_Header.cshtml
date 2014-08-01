@@ -5,7 +5,8 @@
 <script src="../../Scripts/jquery-2.1.1.js"></script>
 <script src="../../Scripts/bootstrap.js" type="text/javascript"></script>
 
-<ul class="nav nav-tabs" id="tabs">
+<div class="navbar navbar-default navbar-fixed-top">
+	<ul class="nav nav-tabs" id="tabs">
 	@Html.MenuLink("Home", "Index", "Home")
 
 	@{
@@ -39,4 +40,7 @@
 		@Html.Partial("_LogOn")
 	</li>
 </ul>
+</div>
+
+
 

@@ -31,6 +31,108 @@ body {
 	float: right;
 }
 
+#add-menu {
+	float: right;
+}
+
 #log-on-link {
 	display: inline-block;
+}
+
+.board-list-item {
+	height: 36px;
+	width: 249px;
+	vertical-align: middle;
+	padding: 9px 10px;
+	cursor: pointer;
+}
+
+	.board-list-item > span {
+		font-weight: bold;
+	}
+
+.list {
+	background: #e3e3e3;
+	border-radius: 3px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-moz-box-orient: vertical;
+	-webkit-box-orient: vertical;
+	-ms-flex-direction: column;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+	-moz-box-flex: 0;
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 260px;
+	-webkit-flex: 0 0 260px;
+	flex: 0 0 260px;
+	margin: 0 5px;
+	max-height: 100%;
+	padding: 4px 5px 3px;
+	position: relative;
+	-webkit-transform: translate3d(0,0,0);
+	width: 260px;
+	float: left;
+}
+
+.card {
+	cursor: pointer;
+	background-color: rgb(251, 251, 251);
+	margin: 7px 0;
+	padding: 5px;
+	border-radius: 3px;
+}
+
+.cards {
+	min-height: 10px;
+}
+
+.add-item {
+	font-style: italic;
+	color: #939393;
+	padding: 5px 0;
+	border-radius: 3px;
+	padding: 0 1px;
+	min-height: 30px;
+	padding: 7px 1px;
+}
+
+.add-card {
+	margin: 10px 0 0 0;
+	padding: 7px 1px;
+}
+
+.list-header {
+	margin: 0 0 10px 0;
+	font-weight: bold;
+}
+
+.add-item-mouseenter {
+	background-color: #AAAAAA;
+	border-radius: 3px;
+	color: black;
+	cursor: pointer;
+}
+
+.card-mouseenter {
+	background-color: rgb(240, 240, 240);
+}
+.sortable-placeholder {
+    background-color: #939393;
+	min-height: 30px;
+	border-radius: 3px;
+}
+
+.sortable-placeholder-list {
+	float: left;
+}
+
+.item-dragging {
+	transform: rotate(5grad);
 }

@@ -1,9 +1,13 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using AutoMapper;
 using OAuth2;
 using OAuth2.Client;
 using Seafplus.BusinessLogic;
+using Seafplus.BusinessLogic.DataModel;
+using Seafplus.BusinessLogic.Enums;
+using Seafplus.BusinessLogic.Helpers;
 using Seafplus.BusinessLogic.Services.Interfaces;
 using Seafplus.BusinessLogic.UnitOfWork;
 using Seafplus.Models;
@@ -14,7 +18,7 @@ namespace Seafplus.Controllers
 	{
 		private readonly IUserService _userService;
 		private readonly AuthorizationRoot _authorizationRoot;
-		private IUnitOfWork _unitOfWork;
+		private readonly IUnitOfWork _unitOfWork;
 
 		public AccountController(IUserService userService, AuthorizationRoot authorizationRoot, IUnitOfWork unitOfWork)
 		{
@@ -34,6 +38,32 @@ namespace Seafplus.Controllers
 		public ActionResult LogOn()
 		{
 			return View();
+		}
+
+		public ActionResult SignUp()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult SignUp(RegisterUserViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var user = Mapper.Map<RegisterUserViewModel, User>(model);
+				user.Password = AuthorizationHelper.GetHashString(model.Password);
+				user.UserRoleId = (int) UserRolesEnum.User;
+				var added = _userService.AddUser(user);
+				if (added)
+				{
+					_unitOfWork.Commit();
+					FormsAuthentication.SetAuthCookie(user.Email, false);
+					return RedirectToAction("Index", "Home");
+				}
+			}
+
+			// If we got this far, something failed, redisplay form
+			return View(model);
 		}
 
 		[HttpPost]
@@ -85,9 +115,8 @@ namespace Seafplus.Controllers
 			{
 				user = _userService.CreateUser(userInfo);
 				_unitOfWork.Commit();
-
 			}
-			
+
 			FormsAuthentication.SetAuthCookie(user.Email, false);
 
 			return RedirectToAction("Index", "Home");

@@ -52,5 +52,17 @@ namespace Seafplus.BusinessLogic.Services
 			_usersRepository.Add(user);
 			return user;
 		}
+
+		public bool AddUser(User user)
+		{
+			var exist = _usersRepository.Count(usr => usr.Email == user.Email) > 0;
+			if (exist)
+			{
+				return false;
+			}
+
+			_usersRepository.Add(user);
+			return true;
+		}
 	}
 }

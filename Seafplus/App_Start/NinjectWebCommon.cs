@@ -1,3 +1,4 @@
+using System.Collections;
 using OAuth2;
 using Seafplus.BusinessLogic.DataModel;
 using Seafplus.BusinessLogic.Repository;
@@ -79,8 +80,14 @@ namespace Seafplus.App_Start
 			kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
 
 			kernel.Bind<IUserService>().To<UserService>().InRequestScope();
+			kernel.Bind<IBoardService>().To<BoardService>().InRequestScope();
+			kernel.Bind<IListService>().To<ListService>().InRequestScope();
 
 	        kernel.Bind<IRepository<User>>().To<BaseRepository<User>>().InRequestScope();
+			kernel.Bind<IRepository<Board>>().To<BaseRepository<Board>>().InRequestScope();
+			kernel.Bind<IRepository<UserBoard>>().To<BaseRepository<UserBoard>>().InRequestScope();
+			kernel.Bind<IRepository<List>>().To<BaseRepository<List>>().InRequestScope();
+			kernel.Bind<IRepository<Card>>().To<BaseRepository<Card>>().InRequestScope();
 
 			kernel.Bind<AuthorizationRoot>().ToSelf().WithConstructorArgument("sectionName", "oauth2");
 

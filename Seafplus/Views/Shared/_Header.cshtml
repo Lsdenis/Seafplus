@@ -6,8 +6,6 @@
 <script src="../../Scripts/bootstrap.js" type="text/javascript"></script>
 
 <ul class="nav nav-tabs" id="tabs">
-	@Html.MenuLink("Home", "Index", "Home")
-
 	@{
 		var user = Session[Constants.SessionKeys.User] as User;
 		if (user == null && Context.User.Identity.IsAuthenticated)
@@ -16,7 +14,18 @@
 		}
 
 		user = Session[Constants.SessionKeys.User] as User;
-		
+
+		<li id="log-on">
+			<span class="user-name">
+
+				@if (user != null)
+	{
+					@user.Email
+	}
+			</span>
+			@Html.Partial("_LogOn")
+		</li>
+
 		if (user != null)
 		{
 			if (user.UserRoleId == (int)UserRolesEnum.Admin)
@@ -24,19 +33,32 @@
 			}
 			else
 			{
+			<li class="dropdown" id="board-menu">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Boards</a>
+			<ul class="dropdown-menu" role="menu" id="board-list">
+			</ul>
+		</li>
+				
+		<li class="dropdown" id="add-menu">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu">
+				<li><a>New board</a>
+				</li>
+				<li><a>New organization</a>
+				</li>
+			</ul>
+		</li>
 			}
+		}
+		else
+		{
+		@Html.MenuLink("Home", "Index", "Home")
 		}
 	}
 
-	<li id="log-on">
-		<span class="user-name">
 
-			@if (user != null)
-   {
-				@user.Email
-   }
-		</span>
-		@Html.Partial("_LogOn")
-	</li>
 </ul>
 
+
+<script src="../../Scripts/header.js"></script>

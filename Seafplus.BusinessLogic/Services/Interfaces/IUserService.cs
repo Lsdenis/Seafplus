@@ -11,5 +11,6 @@ namespace Seafplus.BusinessLogic.Services.Interfaces
 		User CheckLogin(string email, string password);
 		User CheckLogin(string googleId);
 		User CreateUser(UserInfo userInfo);
+		bool AddUser(User user);
 	}
 }

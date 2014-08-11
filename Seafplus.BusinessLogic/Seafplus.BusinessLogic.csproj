@@ -109,6 +109,11 @@
     </Compile>
     <Compile Include="Enums\UserRolesEnum.cs" />
     <Compile Include="Helpers\AuthorizationHelper.cs" />
+    <Compile Include="Services\BoardService.cs" />
+    <Compile Include="Services\Interfaces\IBoardService.cs" />
+    <Compile Include="Services\Interfaces\ICardService.cs" />
+    <Compile Include="Services\Interfaces\IListService.cs" />
+    <Compile Include="Services\ListService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />

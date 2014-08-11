@@ -1,0 +1,28 @@
+﻿@model Seafplus.Models.BoardViewModel
+<div id="board">
+	@foreach (var list in ViewBag.Lists)
+ {
+		<div class="list">
+			<div class="list-header">
+				@list.Name
+			</div>
+			<div class="cards">
+
+				@foreach (var card in list.Cards)
+	{
+					<div class="card">
+						@card
+					</div>
+	}
+			</div>
+			<span class="add-item add-card">Add a card...</span>
+		</div>
+ }
+</div>
+<div class="list add-list">
+	<span class="placeholder js-open-add-list add-item">Add a list…</span>
+</div>
+
+<script src="../../Scripts/jquery-2.1.1.js"></script>
+<script src="../../Scripts/jquery-ui-1.10.4.js"></script>
+<script src="../../Scripts/board.js"></script>

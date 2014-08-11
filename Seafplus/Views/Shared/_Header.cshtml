@@ -4,51 +4,87 @@
 @using Seafplus.Helpers
 <script src="../../Scripts/jquery-2.1.1.js"></script>
 <script src="../../Scripts/bootstrap.js" type="text/javascript"></script>
-
 <div class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-collapse collapse">
-			<ul class="navbar-nav nav">
-				<li id="tabs">
-					@Html.MenuLink("Home", "Index", "Home")
+			@{
+				var user = Session[Constants.SessionKeys.User] as User;
+				if (user == null && Context.User.Identity.IsAuthenticated)
+				{
+					GlobalStoreHelper.SetSession(Context.User.Identity.Name);
+				}
 
-					@{
-						var user = Session[Constants.SessionKeys.User] as User;
-						if (user == null && Context.User.Identity.IsAuthenticated)
-						{
-							GlobalStoreHelper.SetSession(Context.User.Identity.Name);
-						}
+				user = Session[Constants.SessionKeys.User] as User;
 
-						user = Session[Constants.SessionKeys.User] as User;
-
-						if (user != null)
-						{
-							if (user.UserRoleId == (int)UserRolesEnum.Admin)
-							{
-							}
-							else
-							{
-							}
-						}
+				if (user != null)
+				{
+					if (user.UserRoleId == (int)UserRolesEnum.Admin)
+					{
 					}
-				</li>
-			</ul>
-			<ul class="navbar-nav nav navbar-right">
-				<li id="log-on">
-					<span class="user-name">
+					else
+					{
+						<ul class="navbar-nav nav">
 
-						@if (user != null)
-	  {
-							@user.Email
-	  }
-					</span>
-					@Html.Partial("_LogOn")
-				</li>
-			</ul>
+							<li class="dropdown menu-padding" id="board-menu">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Boards</a>
+								<ul class="dropdown-menu" role="menu" id="board-list">
+								</ul>
+							</li>
+							<li>
+								<form class="navbar-form" role="search">
+									<div class="form-group input-group">
+										<input type="text" class="form-control" placeholder="Search...">
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+										</span>
+									</div>
+								</form>
+							</li>
+						</ul>
+						<ul class="navbar-nav nav navbar-right">
+							<li>
+								<div class="navbar-btn">
+									<button type="button" class="btn btn-default">
+										<span class="glyphicon glyphicon-tasks glyphicon-align-center"></span>
+									</button>
+								</div>
+							</li>
+							<li id="log-on" class="menu-padding">
+								<span class="user-name">
+									@user.Email
+								</span>
+								@Html.Partial("_LogOn")
+							</li>
+							<li class="dropdown menu-padding" id="add-menu">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus"></span>
+								</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a>New board</a>
+									</li>
+									<li><a>New organization</a>
+									</li>
+								</ul>
+							</li>
+
+						</ul>
+					}
+				}
+				else
+				{
+					<ul class="navbar-nav nav">
+						<li class="menu-padding">
+							@Html.MenuLink("Home", "Index", "Home")
+						</li>
+					</ul>
+					<ul class="navbar-nav nav navbar-right">
+						<li id="log-on" class="menu-padding">
+							@Html.Partial("_LogOn")
+						</li>
+					</ul>
+				}
+			}
 		</div>
 	</div>
 </div>
 
-
-
-
+<script src="../../Scripts/header.js"></script>

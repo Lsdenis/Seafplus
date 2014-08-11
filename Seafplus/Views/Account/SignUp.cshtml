@@ -1,0 +1,60 @@
+﻿@model Seafplus.Models.RegisterUserViewModel
+@{
+	ViewBag.Title = "Sign up";
+}
+
+<h2>Sign up</h2>
+
+@using (Html.BeginForm())
+{
+	<div class="form">
+		<fieldset>
+			<legend>Account Information</legend>
+
+			<div class="control-label">
+				@Html.LabelFor(m => m.Email)
+			</div>
+			<div>
+				@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+				@Html.ValidationMessageFor(m => m.Email)
+			</div>
+
+			<div class="control-label">
+				@Html.LabelFor(m => m.Password)
+			</div>
+			<div>
+				@Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+				@Html.ValidationMessageFor(m => m.Password)
+			</div>
+
+			<div class="control-label">
+				@Html.LabelFor(m => m.ConfirmPassword)
+			</div>
+			<div>
+				@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+				@Html.ValidationMessageFor(m => m.ConfirmPassword)
+			</div>
+
+			<div class="control-label">
+				@Html.LabelFor(m => m.LastName)
+			</div>
+			<div>
+				@Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+				@Html.ValidationMessageFor(m => m.LastName)
+			</div>
+
+			<div class="control-label">
+				@Html.LabelFor(m => m.FirstName)
+			</div>
+			<div>
+				@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+				@Html.ValidationMessageFor(m => m.FirstName)
+			</div>
+
+			<br />
+			<p>
+				<input type="submit" class="btn btn-primary" value="Sign up" />
+			</p>
+		</fieldset>
+	</div>
+}

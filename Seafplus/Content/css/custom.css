@@ -29,11 +29,9 @@ body {
 }
 
 #log-on {
-	float: right;
 }
 
 #add-menu {
-	float: right;
 }
 
 #log-on-link {
@@ -141,4 +139,7 @@ body {
 .menu-padding {
 	margin-right: 5px;
 	margin-left: 5px;
+}
+
+.bla {
 }

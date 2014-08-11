@@ -42,19 +42,6 @@
 							</li>
 						</ul>
 						<ul class="navbar-nav nav navbar-right">
-							<li>
-								<div class="navbar-btn">
-									<button type="button" class="btn btn-default">
-										<span class="glyphicon glyphicon-tasks glyphicon-align-center"></span>
-									</button>
-								</div>
-							</li>
-							<li id="log-on" class="menu-padding">
-								<span class="user-name">
-									@user.Email
-								</span>
-								@Html.Partial("_LogOn")
-							</li>
 							<li class="dropdown menu-padding" id="add-menu">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus"></span>
 								</a>
@@ -65,7 +52,19 @@
 									</li>
 								</ul>
 							</li>
-
+							<li id="log-on" class="menu-padding">
+								<span class="user-name">
+									@user.Email
+								</span>
+								@Html.Partial("_LogOn")
+							</li>
+							<li>
+								<div class="navbar-btn">
+									<button id="notification-open" type="button" class="btn btn-default">
+										<span class="glyphicon glyphicon-tasks glyphicon-align-center"></span>
+									</button>
+								</div>
+							</li>
 						</ul>
 					}
 				}

@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
 	initBoardsMenu();
+//	initNotificationClick();
 });
 
 function initBoardItemClick() {
@@ -13,6 +14,27 @@ function initBoardItemClick() {
 
 };
 
+//function initNotificationClick() {
+//
+//	$('#notification-open').click(function () {
+//
+//		$.ajax(
+//		{
+//			url: '/Home/Index/',
+//			contentType: 'application/html; charset=utf-8',
+//			type: 'GET',
+//			dataType: 'html',
+//			data: content,
+//			success: function() {
+//				alert(data);
+//			}
+//		}
+//		);
+//
+//	});
+//
+//};
+
 function initBoardsMenu() {
 
 	$('#board-menu').click(function () {
@@ -20,7 +42,7 @@ function initBoardsMenu() {
 		$.ajax({
 			method: 'GET',
 			url: site + boards,
-			data: { },
+			data: {},
 			dataType: 'json',
 			success: function (response) {
 				if (response.success) {
@@ -54,3 +76,5 @@ function drawItem(data, list) {
 	list.append(li);
 	a.append($('<div class="board-list-item" data-id=' + data.Id + '>' + '<span>' + data.Name + '</span>' + '</div>'));
 }
+
+

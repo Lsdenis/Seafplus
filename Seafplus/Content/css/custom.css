@@ -34,7 +34,7 @@ body {
 #add-menu {
 }
 
-#log-on-link {
+#log-on-link1 {
 	display: inline-block;
 }
 
@@ -122,8 +122,9 @@ body {
 .card-mouseenter {
 	background-color: rgb(240, 240, 240);
 }
+
 .sortable-placeholder {
-    background-color: #939393;
+	background-color: #939393;
 	min-height: 30px;
 	border-radius: 3px;
 }
@@ -141,5 +142,3 @@ body {
 	margin-left: 5px;
 }
 
-.bla {
-}

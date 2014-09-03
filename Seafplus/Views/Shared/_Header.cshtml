@@ -23,63 +23,75 @@
 					}
 					else
 					{
-						<ul class="navbar-nav nav">
+				<ul class="navbar-nav nav">
 
-							<li class="dropdown menu-padding" id="board-menu">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Boards</a>
-								<ul class="dropdown-menu" role="menu" id="board-list">
-								</ul>
-							</li>
-							<li>
-								<form class="navbar-form" role="search">
-									<div class="form-group input-group">
-										<input type="text" class="form-control" placeholder="Search...">
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-										</span>
-									</div>
-								</form>
-							</li>
+					<li class="dropdown menu-padding" id="board-menu">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Boards</a>
+						<ul class="dropdown-menu" role="menu" id="board-list">
 						</ul>
-						<ul class="navbar-nav nav navbar-right">
-							<li class="dropdown menu-padding" id="add-menu">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus"></span>
-								</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a>New board</a>
-									</li>
-									<li><a>New organization</a>
-									</li>
-								</ul>
-							</li>
-							<li id="log-on" class="menu-padding">
-								<span class="user-name">
-									@user.Email
+					</li>
+					<li>
+						<form class="navbar-form" role="search">
+							<div class="form-group input-group">
+								<input type="text" class="form-control" placeholder="Search...">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
 								</span>
-								@Html.Partial("_LogOn")
+							</div>
+						</form>
+					</li>
+				</ul>
+				<ul class="navbar-nav nav navbar-right">
+					<li class="dropdown menu-padding" id="add-menu">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-plus"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a>New board</a>
 							</li>
-							<li>
-								<div class="navbar-btn">
-									<button id="notification-open" type="button" class="btn btn-default">
-										<span class="glyphicon glyphicon-tasks glyphicon-align-center"></span>
-									</button>
-								</div>
+							<li><a>New organization</a>
 							</li>
 						</ul>
+					</li>
+					<li>
+						<div class=" navbar-default navbar-btn">
+							<div class="dropdown">
+								<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+									@user.Email
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li role="presentation">@Html.MenuLink("Home", "Index", "Home")</li>
+									<li role="presentation" class="divider"></li>
+									<li role="presentation">@Html.Partial("_LogOn")</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="navbar-btn">
+							<div class="dropdown">
+								<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-tasks glyphicon-align-center"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
 					}
 				}
 				else
 				{
-					<ul class="navbar-nav nav">
-						<li class="menu-padding">
-							@Html.MenuLink("Home", "Index", "Home")
-						</li>
-					</ul>
-					<ul class="navbar-nav nav navbar-right">
-						<li id="log-on" class="menu-padding">
-							@Html.Partial("_LogOn")
-						</li>
-					</ul>
+				<ul class="navbar-nav nav">
+					<li class="menu-padding">
+						@Html.MenuLink("Home", "Index", "Home")
+					</li>
+				</ul>
+				<ul class="navbar-nav nav navbar-right">
+					<li id="log-on" class="menu-padding">
+						@Html.Partial("_LogOn")
+					</li>
+				</ul>
 				}
 			}
 		</div>

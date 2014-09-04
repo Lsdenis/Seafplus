@@ -68,13 +68,10 @@
 					</li>
 					<li>
 						<div class="navbar-btn">
-							<div class="dropdown">
-								<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-tasks glyphicon-align-center"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">
-								</ul>
-							</div>
+							<button class="btn btn-default" id="notification-open" data-trigger="focus">
+								<span class="glyphicon glyphicon-th-large"></span>
+							</button>
+							<div class="display-none" id="notification-popover-content">asdasd</div>
 						</div>
 					</li>
 				</ul>
@@ -99,3 +96,4 @@
 </div>
 
 <script src="../../Scripts/header.js"></script>
+@Html.Hidden("HomeIndexPath", Url.Action("EmptyNotification", "Notification"))

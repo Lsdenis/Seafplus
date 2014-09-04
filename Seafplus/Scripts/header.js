@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 	initBoardsMenu();
-//	initNotificationClick();
+	initNotification();
 });
 
 function initBoardItemClick() {
@@ -14,26 +14,28 @@ function initBoardItemClick() {
 
 };
 
-//function initNotificationClick() {
-//
-//	$('#notification-open').click(function () {
-//
-//		$.ajax(
-//		{
-//			url: '/Home/Index/',
-//			contentType: 'application/html; charset=utf-8',
-//			type: 'GET',
-//			dataType: 'html',
-//			data: content,
-//			success: function() {
-//				alert(data);
-//			}
-//		}
-//		);
-//
-//	});
-//
-//};
+function initNotification() {
+
+	$.ajax({
+		type: 'GET',
+		url: $("#HomeIndexPath").val(),
+		success: function (data) {
+			$('#notification-popover-content').html(data);
+		}
+	});
+
+	$('#notification-open').each(function () {
+
+		$('#notification-open').popover({
+			html: true,
+			placement: 'bottom',
+			title: 'Activities',
+			content: function () {
+				return $('#notification-popover-content').html();
+			}
+		});
+	});
+};
 
 function initBoardsMenu() {
 

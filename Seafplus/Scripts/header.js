@@ -28,8 +28,16 @@ function initNotification() {
 
 		$('#notification-open').popover({
 			html: true,
+			trigger: 'focus',
+			container: 'body',
 			placement: 'bottom',
 			title: 'Activities',
+			template: '<div class="popover popover-medium">' +
+				'<div class="arrow"></div>' +
+				'<div class="popover-inner">' +
+				'<h3 class="popover-title text-center"></h3>' +
+				'<div class="popover-content"><p></p>' +
+				'</div></div></div>',
 			content: function () {
 				return $('#notification-popover-content').html();
 			}

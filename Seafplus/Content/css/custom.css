@@ -145,3 +145,8 @@ body {
 .display-none {
 	display: none;
 }
+
+.popover {
+	width: 500px;
+	height: 200px;
+}
